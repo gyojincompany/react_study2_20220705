@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 
 function Hello({color, name}) {
@@ -40,6 +40,8 @@ function InputSample() {
     name:"홍길동", email:"hong@abc.com"
   });
 
+  const nameInput = useRef();
+
   const {name, email } = inputs;  
 
   const onChangeInput = (inputT)=>{
@@ -55,17 +57,42 @@ function InputSample() {
       name : "",
       email : ""
     });
+    nameInput.current.focus();
   }
 
   return(
     <div>
-      <input name="name" onChange={onChangeInput} value={name}></input>
-      <input name="email" onChange={onChangeInput} value={email}></input>
+      이름:<input name="name" onChange={onChangeInput} value={name}></input><br></br>
+      이메일:<input name="email" onChange={onChangeInput} value={email}></input>
       <button onClick={onReset}>초기화</button>
       <div>
-        <h1>입력값:{name}의 이메일은 {email}입니다.</h1>
+        <h1>이름:{name}</h1>
+        <h1>이메일:{email}</h1>
       </div>
+    </div>
+  );
+}
 
+function User({user}) {
+  return(
+    <div>
+      <h1>이름 : {user.username}</h1>
+      <h1>이메일 : {user.email}</h1>
+    </div>
+  );
+}
+
+function UserList() {
+
+  const users =[
+    {id:1, username:"홍길동", email:'hong@abc.com'},
+    {id:2, username:"이순신", email:'lee@gubuk.com'}
+  ];
+
+  return (
+    <div>
+      <User user={users[0]}></User>
+      <User user={users[1]}></User>
     </div>
   );
 }
@@ -76,7 +103,8 @@ function App() {
       {/* <Hello name="리액트" color="red"></Hello>
       <Hello color="blue"></Hello> 
       <Counter></Counter> */}
-      <InputSample></InputSample>
+      {/* <InputSample></InputSample> */}
+      <UserList></UserList>
     </div>
   );
 }
