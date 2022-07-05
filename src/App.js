@@ -47,7 +47,7 @@ function InputSample() {
   const onChangeInput = (inputT)=>{
     const {value, name} = inputT.target;
     setInputs({
-      ...inputs, // spread문법, 기존의 inputs 의 내용 복사
+      ...inputs, // spread문법, 기존의 inputs 의 내용 복사!!!!!!
       [name] : value
     });
   }
